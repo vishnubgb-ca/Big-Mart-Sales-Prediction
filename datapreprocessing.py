@@ -1,4 +1,4 @@
-from dataanalysis import data_analysis
+from data_analysis import data_analysis
 def data_preprocessing():
     dataset = data_analysis()
     print(dataset.isnull().sum())
