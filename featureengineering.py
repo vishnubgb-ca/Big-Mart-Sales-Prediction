@@ -39,6 +39,6 @@ def feature_engineering():
     # dataset = pd.get_dummies(dataset, columns=['Item_Fat_Content','Outlet_Location_Type','Outlet_Size','Outlet_Type'])
     dataset.drop('Outlet_Establishment_Year', axis=1, inplace=True)
     dataset.drop('Outlet_Identifier', axis=1, inplace=True)
-    dataset.to_csv("Bigmart_Sales_cleaned_dataset.csv", index = False)
+    dataset.to_csv("cleaned_data.csv", index = False)
     return dataset
 feature_engineering()
