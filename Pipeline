@@ -1,37 +1,16 @@
 pipeline{
     agent any
-
-    stages{
-        stage("load data"){
-            steps{
-                sh 'python3 loaddata.py'
-            }
-        }
-        stage("data analysis"){
-            steps{
-                sh 'python3 dataanalysis.py'
-            }
-        }
-        stage("data preprocessing"){
-            steps{
-                sh 'python3 datapreprocessing.py'
-            }
-        }
-        stage("data visualization"){
-            steps{
-                sh 'python3 datavisualization.py'
-            }
-        }
-        stage("feature engineering"){
-            steps{
-                sh 'python3 featureengineering.py'
-            }
-        }
+    environment{
+        airflow_url = credentials('airflow_url')
+        airflow_username = credentials('airflow_username')
+        airflow_password = credentials('airflow_password')
     }
-    post{
-       
-        always {
-            archiveArtifacts artifacts: 'Bigmart_Sales_cleaned_dataset.csv', onlyIfSuccessful: true
-        }
+    stages{
+        
+        stage("Trigger Airflow Dag"){
+            steps{
+                 sh "python3 trigger_airflow_dag.py"
+                }
             }
+        }
 }
